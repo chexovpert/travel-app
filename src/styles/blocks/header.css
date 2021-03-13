@@ -1,0 +1,53 @@
+.header__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px dashed red;
+  width: 100%;
+  height: 40px;
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 50px;
+  border: 0.5px solid white;
+}
+
+.main-page__link--wrapper {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 40px;
+  margin-right: 15px;
+  transition: opacity 0.1s ease-out;
+
+}
+
+.main-page__link--wrapper:hover {
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in;
+}
+
+.main-page__image {
+  width: auto;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.main-page__text {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.find__input {
+  margin-left: auto;
+}
+
+.lang__item:checked {
+  font-weight: bold;
+}
