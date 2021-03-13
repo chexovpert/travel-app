@@ -1,0 +1,36 @@
+.root {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: green;
+}
+.svg {
+  width: 100px;
+  height: 30px;
+  padding-top: 10px;
+}
+.footerauthor {
+  text-decoration: none;
+  color: darkgreen;
+  text-shadow: 0 1px black;
+}
+.footerauthor:hover {
+  color: lawngreen;
+  text-shadow: 0 1px rgb(206, 252, 0);
+  text-decoration: none;
+}
+.rslink {
+  margin-right: 30px;
+  text-decoration: none;
+  color: darkgreen;
+  text-shadow: 0 1px black;
+}
+.rslink:hover {
+  color: lawngreen;
+  text-shadow: 0 1px rgb(206, 252, 0);
+  text-decoration: none;
+}

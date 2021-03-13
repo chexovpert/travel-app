@@ -1,0 +1,21 @@
+.timeWidget {
+  /* font-family: "Quicksand", sans-serif; */
+  /* max-width: 300px; */
+  /* font-size: 300%;
+  padding-top: 0px;
+  
+  text-shadow: white 0px 0px 3px;  */
+  font-family: "Share Tech Mono", monospace;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+}
+.timeWidget__date {
+  letter-spacing: 0.1em;
+  font-size: 24px;
+}
+.timeWidget__time {
+  letter-spacing: 0.05em;
+  font-size: 80px;
+  padding: 5px 0;
+}

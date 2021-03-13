@@ -1,0 +1,28 @@
+.exchange {
+  max-width: 300px;
+  padding: 5px;
+  background-color: white;
+}
+
+.exchange__table {
+  width: 100%;
+}
+
+.exchange__base {
+  background-color: #2d6ab4;
+  height: 24px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 3px;
+  width: 100%;
+}
+.exchange__current {
+  background-color: white;
+  font-size: 0.875em;
+}
+.exchange__date {
+  font-size: 0.875em;
+  color: blue;
+  text-align: right;
+}

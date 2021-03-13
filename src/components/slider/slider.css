@@ -1,0 +1,27 @@
+@import "/node_modules/slick-carousel/slick/slick.css";
+@import "/node_modules/slick-carousel/slick/slick-theme.css";
+.container {
+  padding: 40px;
+  background: transparent;
+}
+
+.slick-slide img {
+  margin: auto;
+}
+
+.center img {
+  background-color: springgreen;
+  transition: all 0.3s ease;
+  height: 250px;
+  width: 150px;
+  opacity: 0.8;
+}
+
+.center .slick-center img {
+  height: 350px;
+  width: 150px;
+  color: #e67e22;
+  opacity: 1;
+  -ms-transform: scale(1.08);
+  transform: scale(1.08);
+}
