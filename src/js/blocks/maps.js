@@ -115,7 +115,7 @@ export default (props) => {
             let geoObject = new ymaps.GeoObject(geojson.features[i]);
 
             mapRef.current.geoObjects.add(objectManager);
-            //mapRef.geoObjects.add(geoObject);
+            mapRef.current.geoObjects.add(geoObject);
           }
         });
     }
@@ -132,7 +132,7 @@ export default (props) => {
         instanceRef={mapRef}
         defaultState={{
           center: [55.75, 37.57],
-          zoom: 9,
+          zoom: 3,
           controls: ["zoomControl", "fullscreenControl"],
         }}
         modules={[

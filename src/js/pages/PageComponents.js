@@ -50,28 +50,30 @@ export default class PageComponents extends Component {
     return (
       <HashRouter basename="/">
         <div className="app-wrapper">
-          <Header />
-          <main className="main__wrapper" onClick={this.updateCountry}>
-            <Switch>
-              <Route
-                path={"/Country-:countryName"}
-                exact
-                render={(props) => (
-                  <CountryPage
-                    // countryData={this.state.countryData}
-                    {...props}
-                  ></CountryPage>
-                )}
-              />
-              {/* <Route path={`/Country-${this.state.countryName}`} exact >
+          <div className="content-wrapper">
+            <Header />
+            <main className="main__wrapper" onClick={this.updateCountry}>
+              <Switch>
+                <Route
+                  path={"/Country-:countryName"}
+                  exact
+                  render={(props) => (
+                    <CountryPage
+                      // countryData={this.state.countryData}
+                      {...props}
+                    ></CountryPage>
+                  )}
+                />
+                {/* <Route path={`/Country-${this.state.countryName}`} exact >
                 <CountryPage countryName={this.state.countryName} 
                 />
               </Route> */}
-              <Route path="/" exact>
-                <MainPage />
-              </Route>
-            </Switch>
-          </main>
+                <Route path="/" exact>
+                  <MainPage />
+                </Route>
+              </Switch>
+            </main>
+          </div>
           <Footer />
         </div>
       </HashRouter>

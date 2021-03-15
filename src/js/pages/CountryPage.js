@@ -128,11 +128,11 @@ export default (props) => {
         <p>{data.capital}</p>
         <h2>{data.about}</h2>
         <h2>Gallery</h2>
-        <ImageGallery />
+        <ImageGallery images={data.images} />
         <h2>Location</h2>
         <Maps></Maps>
         <h2>Video</h2>
-        <Video />
+        <Video url={data.video} />
       </div>
 
       <div class="countryPage__aside">

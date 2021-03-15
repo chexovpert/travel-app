@@ -7,7 +7,7 @@ export default (props) => {
     <div className="player-wrapper">
       <ReactPlayer
         className="react-player"
-        url="https://www.youtube.com/embed/Gb0TQ7VeApY"
+        url={props.url}
         width="100%"
         height="100%"
         controls="true"
