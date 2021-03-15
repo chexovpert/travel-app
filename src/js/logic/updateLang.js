@@ -2,7 +2,11 @@ import appData from '../data/appData';
 
 export const updateLang = (selectedLang, langApp) => {
   const wrapper = document.querySelector('.app-wrapper');
+  const currFlag = document.querySelector('.curr-lang__flag');
   const lang = selectedLang;
+  const stateLang = document.getElementsByTagName('html')[0];
+  stateLang.setAttribute('lang', lang);
+  if (currFlag) currFlag.className = `curr-lang__flag flag__${lang}`
   for (let key in langApp) {
     let elem = wrapper.querySelector(`.${key}--lang`);
     if (elem && langApp[key][lang]) {
@@ -27,9 +31,6 @@ export const updateLang = (selectedLang, langApp) => {
       countryAboutArr[i].textContent = item.about;
       i++
     })
-    
-    console.log('LANG # - ', dataLangIndex);
-
   }
 }
 
