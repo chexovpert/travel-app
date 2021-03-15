@@ -1,3 +1,7 @@
+.country-page__wrapper {
+  padding: 70px 0 25px;
+  border: 1px solid white;
+}
 .countryPage {
   min-height: 100vh;
   /* padding: 90px 50px 50px 80px; */

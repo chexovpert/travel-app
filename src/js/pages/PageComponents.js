@@ -18,20 +18,10 @@ export default class PageComponents extends Component {
     this.state = {
       countryArr: appData[1][0],
       countryName: "",
-      countryData: null,
     };
-
-    // this.sss = this.sss.bind(this);
     this.updateCountry = this.updateCountry.bind(this);
   }
 
-  // sss() {
-  //   console.log(this.state.hash)
-
-  //   // window.addEventListener('onhashchange', () => {
-  //   //   console.log('CHANGE!!!!!')
-  //   // })
-  // }
   updateCountry(event) {
     const linkItem = event.target.closest(".country__link");
     const linkItemPreview = event.target.closest(".precountry__link");
@@ -41,7 +31,6 @@ export default class PageComponents extends Component {
       if (linkItemPreview) {
         const currentItem = document.querySelector(".country__item--current");
         currCountryName = currentItem.querySelector(".country__name");
-        console.log("!@#!@#", currCountryName.textContent, currentItem);
       }
       this.state.countryArr.forEach((item) => {
         if (item.country.includes(currCountryName.textContent)) {

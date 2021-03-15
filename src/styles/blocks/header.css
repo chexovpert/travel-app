@@ -2,9 +2,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  border: 1px dashed red;
   width: 100%;
   height: 40px;
+  z-index: 10;
 }
 
 .header__content {
@@ -13,7 +13,6 @@
   height: 100%;
   margin: 0 auto;
   padding: 0 50px;
-  border: 0.5px solid white;
 }
 
 .main-page__link--wrapper {
@@ -23,7 +22,6 @@
   height: 40px;
   margin-right: 15px;
   transition: opacity 0.1s ease-out;
-
 }
 
 .main-page__link--wrapper:hover {
@@ -44,10 +42,102 @@
   letter-spacing: 1px;
 }
 
+.find__input,
+.select__lang {
+  height: 25px;
+  font-size: 0.9rem;
+  line-height: 25px;
+  color: var(--white);
+  border: 1px solid var(--white);
+  border-radius: 2px;
+  background-color: transparent;
+}
+
 .find__input {
   margin-left: auto;
+  margin-right: 10px;
+  padding-left: 5px;
+  width: 150px;
+}
+
+.find__input::placeholder {
+  color: var(--white);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.find__input:hover {
+  background-color: var(--white);
+  transition: background-color 0.5s ease-in-out;
+}
+
+.find__input:focus {
+  color: var(--white);  
+  transition: color 0.4s ease-in-out;
+}
+
+.find__input:hover::placeholder {
+  color: var(--black);
+  transition: color 0.4s ease-in-out;
+}
+
+.find__input:focus:hover {
+  color: var(--black);
+  transition: color 0.4s ease-in-out;
+}
+
+.select__lang {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 23px;
+  line-height: 25px;
+}
+
+.lang__item {
+  color: var(--white);
+  height: 55px;
+  line-height: 25px;
+  background: var(--black);
+  color: var(--whiteOpacity);
 }
 
 .lang__item:checked {
   font-weight: bold;
+  color: var(--white)
+}
+
+@media(max-width: 768px) {
+  .header__content  {
+    padding: 0 20px;
+  }
+
+  .main-page__link--wrapper {
+    margin-right: 10px;
+  }
+
+  .main-page__image {
+    margin-right: 5px;
+  }
+
+  .main-page__text {
+    display: none;
+  }
+
+  .find__input,
+  .select__lang {
+    font-size: 0.8rem;
+  }
+
+  .find__input {
+    width: 120px;
+  }
+
+  /* .select__lang {
+    width: 180px;
+  } */
+
+  .lang__item {
+    font-size: 0.8rem;
+    width: 80px;
+  }
 }
