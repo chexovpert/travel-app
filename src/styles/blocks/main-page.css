@@ -1,10 +1,9 @@
 .main__wrapper {
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
 }
 
 .main-page__content {
-  border: 0.5px solid white;
-  min-height: 100vh;
+  min-height: calc(100vh - 40px);
   margin: 0 auto;
 }
 
@@ -20,7 +19,7 @@
 }
 
 .main-page--bg {
-  background: url('../../assets/images/countries/country-bg/spain-bg.jpg') no-repeat center 0;
+  background: url('../../assets/images/countries/country-bg/spain-bg.jpg') no-repeat center bottom;
   background-size: cover;
 }
 
@@ -43,20 +42,15 @@
 }
 
 .main-page__preview {
+  position: relative;
   padding: 90px 0 50px 80px;
 }
 
 .preview__wrapper {
   position: relative;
-  border: 1px dashed red;
   display: flex;
   align-items: center;
-  height: 500px;
-}
-
-.country__text--wrapper,
-.country__list--wrapper {
-  border: 1px solid yellow
+  min-height: 500px;
 }
 
 .country__text--wrapper {
@@ -76,7 +70,6 @@
 
 .country-name__list--wrapper,
 .country-about__list--wrapper {
-  border: 1px dashed white;
   margin-bottom: 10px;
   height: 70px;
   overflow-y: hidden;
@@ -91,7 +84,6 @@
 
 .country-name__item,
 .country-about__item {
-  border: 1px solid pink;
   height: 70px;
 }
 
@@ -138,7 +130,7 @@
 
 .country__list--wrapper {
   margin-left: auto;
-  width: 800px;
+  width: calc(100% - 270px);
   padding-right: 0;
 }
 
@@ -147,7 +139,6 @@
   margin-bottom: 15px;
   padding: 0 0 0 255px;
   overflow-x: hidden;
-  border: 1px solid white;
 }
 
 .country__list {
@@ -166,6 +157,7 @@
 
 .country__item--current {
   height: 380px;
+  z-index: 50;
 }
 
 @keyframes height-low {
@@ -203,7 +195,6 @@
 }
 
 .country__link {
-  border: 1px dashed lightblue;
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
@@ -236,15 +227,15 @@
   width: 100%;
   height: auto;
   flex-grow: 1;
-  background-color: yellowgreen;
-  background: url('../../assets/images/countries/country-preview/bali-preview.jpg') no-repeat center center;
+  background-color: var(--bg-color);
+  background: url('../../assets/images/countries/country-preview/indonesia-preview.jpg') no-repeat center bottom;
   background-size: cover;
   border-radius: 8px;
   transition: box-shadow 0.2s ease-out;
 }
 
 .country__link:hover .country__image {
-  box-shadow: 0 0 20px 0 var(--white);
+  box-shadow: 0 0 15px 0 var(--white);
   transition: box-shadow 0.2s ease-in;
 }
 
@@ -253,7 +244,6 @@
   align-items: flex-end;
   padding-left: 255px;
   margin-right: 50px;
-  border: 1px dashed red;  
 }
 
 .preview-list__btn {
@@ -272,7 +262,7 @@
   position: absolute;
   top: calc(50% - 5px);
   left: calc(50% - 5px);
-  width: 6px;
+  width: 4px;
   height: 6px;
   border: 2px solid var(--white);
   border-top-color: transparent;
@@ -325,10 +315,220 @@
 }
 
 .curr-lang {
-  border: 1px dashed white;
   width: fit-content;
   margin-top: auto;
   margin-left: auto;
+  margin-right: 5px;
   font-size: 0.7rem;
   text-transform: uppercase;
+}
+
+.curr-lang__flag {
+  width: 20px;
+  height: 20px;
+  background: no-repeat center bottom;
+  background-size: cover;
+}
+
+.flag__rus {
+  background-image: url('../../assets/images/icons/flag-russia.png')
+}
+
+.flag__eng {
+  background-image: url('../../assets/images/icons/flag-england.png')
+}
+
+.flag__es {
+  background-image: url('../../assets/images/icons/flag-spain.png')
+}
+
+.preview__line--wrapper {
+  position: absolute;
+  left: 25px;
+  top: 60px;
+  height: calc(100% - 60px);
+  width: 4px;
+}
+
+.preview-count__list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+}
+
+.preview-count__item {
+  margin-bottom: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  height: auto;
+  flex-grow: 1;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.country__count--wrapper {
+  position: absolute;
+  left: -7px;
+  bottom: -20px;
+  display: flex;
+  width: 50px;
+  height: 18px;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+}
+
+.country__count--list,
+.country__count--total {
+  width: 45%;
+  font-size: 0.6rem;
+}
+
+.country__count--total {
+  line-height: 18px;
+}
+
+.country__count--list {
+  overflow-y: hidden;
+}
+
+.count__list {
+  transition: transform 0.4s ease-in-out;
+}
+
+.count__item {
+  height: 18px;
+  line-height: 18px;
+  text-align: right;
+  width: 100%;
+}
+
+.preview-count__item,
+.count__item {
+  letter-spacing: 2px;
+}
+
+.curr-count {
+  background-color: var(--white);
+  transition: background-color 0.5s ease-in-out;
+}
+
+
+@media(max-width: 1200px) {
+  .main-page__preview {
+    padding: 80px 0 50px 50px;
+  }
+
+  .preview__wrapper {
+    min-height: 400px;
+  }
+
+  .country-name__item {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+
+  .country-about__item {
+    max-width: 350px;
+    font-size: 0.7rem;
+  }
+
+  .precountry__link {
+    width: 160px;
+    height: 40px;
+    font-size: 0.9rem;
+    transition: width 0.3s linear;
+  }
+  
+  .precountry__link--lang {
+    margin-right: 10px;
+  }
+
+  .country__list--wrapper {
+    width: calc(100% - 120px)
+  }
+}
+
+
+@media(max-width: 768px) {
+  .main-page__preview {
+    padding: 60px 0 25px 20px;
+  }
+
+  .preview__line--wrapper {
+    flex-wrap: wrap;
+    left: 8px;
+    width: 3px;
+  }
+
+
+  .country__count--list,
+  .country__count--total {
+    font-size: 0.5rem;
+  }
+
+  .preview-count__item,
+  .count__item {
+    letter-spacing: 1px;
+  }
+
+  .country__text--wrapper {
+    top: auto;
+    bottom: 0;
+    height: auto;
+    width: calc(100% - 20px);
+  }
+
+  .country-name__list--wrapper {
+    display: none;
+  }
+
+  .country-name__item {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .country-about__item {
+    font-size: 0.7rem;
+  }
+
+  .precountry__link {
+    width: 120px;
+    height: 30px;
+    font-size: 0.8rem;
+    transition: width 0.3s linear;
+  }
+
+  .precountry__link--lang {
+    margin-right: 5px;
+  }
+
+  .country__list--wrapper {
+    width: calc(100% - 15px)
+  }
+
+  .country__list--content {
+    height: 410px;
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  .preview-list__btn--wrapper {
+    display: flex;
+    align-items: flex-end;
+    padding-left: 0;
+    margin-right: 50px;
+  }
+  
+  .preview-list__btn--wrapper {
+    margin-bottom: 125px;
+  }
+
+
+
+  /*
+
+  
+
+
+
+  */
 }

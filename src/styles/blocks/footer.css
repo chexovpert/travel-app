@@ -1,11 +1,11 @@
 .footer__wrapper {
-  position: absolute;
+  /*position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0;*/
+  position: relative;
   width: 100%;
   height: 40px;
   color: var(--white);
-  border: 1px dashed red;
 }
 
 .footer__list {
@@ -14,7 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 0.5px solid white;
 }
 
 .logo-rs__wrapper {
@@ -98,10 +97,45 @@
   transition: transform 0.1s ease-in;
 }
 
-@media(max-width: 1200px) {
-
-}
-
 @media(max-width: 768px) {
+  .footer__list {
+    padding: 0 20px;
+  }
+
+  .logo-rs__wrapper {
+    width: 60px;
+  }
+
+  .task-date {
+    letter-spacing: 0;
+    width: 40px;
+    font-size: 0.8rem;
+  }
+
+  .octicon__wrapper {
+    margin-right: 5px;
+  }
+
+  .octicon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+  }
+
+  .authors__list {
+    flex-direction: column;
+  }
+
+  .authors__item {
+    font-size: 0.7rem;
+    margin: 0;
+
+  }
+
+  .authors__link {
+    line-height: 1;
+    text-align: right;
+    width: 100%;
+  }
 
 }

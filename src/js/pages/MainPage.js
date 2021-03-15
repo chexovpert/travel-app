@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import updateMainBgn from '../logic/updateMainBg';
 import PreviewText from '../blocks/PreviewText';
+import PreviewLine from '../blocks/PreviewLine';
+
 
 
 export default class MainPage extends Component {
@@ -21,6 +23,7 @@ export default class MainPage extends Component {
       moveCount: 0,
       namePosY: 0,
       aboutPosY: 0,
+      countPosY: 0,
       disabled: true,
       currPreCountry: 'spain',
     }
@@ -33,12 +36,16 @@ export default class MainPage extends Component {
     const currCountryList = document.querySelector('.country__list');
     const countryNameList = document.querySelector('.country-name__list');
     const countryAboutList = document.querySelector('.country-about__list');
+    const countList = document.querySelector('.count__list');
+    const currCount = document.querySelector('.curr-count');
+    const countArray = document.querySelectorAll('.preview-count__item');
     const countryNameHeight = document.querySelector('.country-name__item').offsetHeight;
     const countryAboutHeight = document.querySelector('.country-about__item').offsetHeight;
+    const countHeight = document.querySelector('.count__item').offsetHeight;
     const currItem = document.querySelector('.country__item--current');
     const btnLeft = document.querySelector('.btn__left');
     const btnRight = document.querySelector('.btn__right');
-    console.log(btnRight.disabled)
+    currCount.classList.remove('curr-count')
     this.state.itemSize = currItem.offsetWidth + marginRight;
     if (event.target.closest('.btn__left') && this.state.posX < this.state.countryList.length - 1) {
       if (btnRight.disabled) {
@@ -55,6 +62,7 @@ export default class MainPage extends Component {
       this.state.moveCount -=this.state.itemSize;
       this.state.namePosY -=countryNameHeight;
       this.state.aboutPosY -=countryAboutHeight;
+      this.state.countPosY -=countHeight;
       this.state.countryList[this.state.posX].classList.remove('country__item--current-off');
       this.state.countryList[this.state.posX].classList.add('country__item--current-on');
     };
@@ -75,6 +83,7 @@ export default class MainPage extends Component {
       this.state.moveCount +=this.state.itemSize;
       this.state.namePosY +=countryNameHeight;
       this.state.aboutPosY +=countryAboutHeight;
+      this.state.countPosY +=countHeight;
     };
     if (this.state.posX === this.state.countryList.length - 1) {
       btnLeft.setAttribute('disabled', this.state.disabled)
@@ -84,6 +93,7 @@ export default class MainPage extends Component {
       btnRight.setAttribute('disabled', this.state.disabled)
     }
     updateMainBgn(this.state.posX, this.state.countryData);
+    countArray[this.state.posX].classList.add('curr-count');
     setTimeout(() => {
       currItem.classList.remove('country__item--current');
       this.state.countryList[this.state.posX].classList.add('country__item--current');
@@ -99,21 +109,29 @@ export default class MainPage extends Component {
     }, 200);
     currCountryList.style.transform = `translateX(${this.state.moveCount}px)`;
     countryNameList.style.transform = `translateY(${this.state.namePosY}px)`;
-    countryAboutList.style.transform = `translateY(${this.state.aboutPosY}px)`
+    countryAboutList.style.transform = `translateY(${this.state.aboutPosY}px)`;
+    countList.style.transform = `translateY(${this.state.countPosY}px)`
   }
 
   componentDidMount() {
-    //const langValueArr = 0;
     const countryArr = 1;
     const stateCountryList = document.querySelectorAll('.country__item');
     stateCountryList[0].classList.add('country__item--current');
     const stateLang = document.getElementsByTagName('html')[0].getAttribute('lang');
+    // this.setState({
+    //   countryList: stateCountryList,
+    //   lang: stateLang,
+    // });
+    this.state.countryList = stateCountryList;
+    this.state.lang = stateLang;
+    const langIndex = appData[0].indexOf(this.state.lang);
+    // this.setState({
+    //   countryData: appData[countryArr][langIndex],
+    // })
+    this.state.countryData = appData[countryArr][langIndex];
     this.setState({
       countryList: stateCountryList,
       lang: stateLang,
-    });
-    const langIndex = appData[0].indexOf(this.state.lang);
-    this.setState({
       countryData: appData[countryArr][langIndex],
     })
   }
@@ -125,6 +143,7 @@ export default class MainPage extends Component {
         <div className="current-bg main-page--bg" style={{backgroundImage: `url('${this.state.countryData[0].bgImage}')`}}></div>
         <div className="main-page--bg-linear"></div>
         <div className="main-page__preview">
+          <PreviewLine countryData={this.state.countryData} />
           <div className="preview__wrapper">
             <PreviewText countryData={this.state.countryData} currPreCountry={this.state.currPreCountry}/>
             <div className="country__list--wrapper">
@@ -148,7 +167,8 @@ export default class MainPage extends Component {
               <div className="preview-list__btn--wrapper">
                 <button type="button" className="preview-list__btn preview-list__btn--left btn__left" onClick={this.countryItemChange}>Left</button>
                 <button type="button" className="preview-list__btn preview-list__btn--right btn__right" onClick={this.countryItemChange} disabled={this.state.disabled}>Right</button>
-                <p className="curr-lang curr-lang--lang">{this.state.lang}</p>
+                <p className="curr-lang curr-lang--lang">{this.state.curLang}</p>
+                <p className={`curr-lang__flag flag__${this.state.lang}`}></p>
               </div>
             </div> 
           </div>
