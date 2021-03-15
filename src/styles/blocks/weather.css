@@ -1,0 +1,31 @@
+.weather {
+  width: 100%;
+  max-width: 300px;
+  background-color: whitesmoke;
+  border-radius: 3%;
+  font-size: 60px;
+}
+
+.weather__city {
+  width: 100%;
+  /* margin: 20px auto; */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  background-color: #2d6ab4;
+}
+
+.weather__icon {
+  width: 100%;
+  text-align: center;
+  color: skyblue;
+}
+
+.weather__data {
+  font-size: 30px;
+  text-align: center;
+  color: gray;
+}
