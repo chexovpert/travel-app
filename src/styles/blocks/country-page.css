@@ -33,7 +33,7 @@
   font-size: 20px;
   padding-bottom: 10px;
 }
-#map {
+.map {
   max-width: 900px;
   min-height: 400px;
 }

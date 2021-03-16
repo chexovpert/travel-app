@@ -89,7 +89,7 @@
 
 //   return <div id="map" />;
 // }
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   YMaps,
   Map,
@@ -97,54 +97,140 @@ import {
   Panorama,
   ObjectManager,
 } from "react-yandex-maps";
-const mapState = { center: [55.76, 37.64], zoom: 10 };
-const COLORS = ["#F0F075", "#FB6C3F", "#3D4C76", "#49C0B5"];
-
+//const mapState = { center: [55.76, 37.64], zoom: 10 };
+//const COLORS = ["#F0F075", "#FB6C3F", "#3D4C76", "#49C0B5"];
+let yamaps= null;
+let layer = null;
 export default (props) => {
+  const [coords, setCoords] = useState(props.coordinates)
   const mapRef = React.createRef(null);
-  const getRegions = (ymaps) => {
+  const yMapRef = React.createRef(null);
+  console.log(props)
+  // const addLayer = () => {
+  //   mapRef.current.layers.add(layer)
+  // }
+  const onApiAvaliable = ymaps => {
+    if(!ymaps.panorama.isSupported()) {
+      return
+    };
+    ymaps.panorama.locate([55.733685, 37.588264]).done(
+      function(panoramas) {
+        if (panoramas.lenght>0) {
+          const player = new ymaps.panorama.Player('player1', panoramas[0], {
+            direction: [256,16]
+          });
+        }
+      }, function (error) {
+        console.log(error);
+      }
+    )
+  }
+  const panoramas = (ymaps) => {
+  ymaps.getPanoramaManager().then(function (manager) {
+    // Включаем режим поиска панорам на карте.
+    manager.enableLookup();
+    // Открываем плеер панорам.
+    manager.openPlayer(ymaps.getCenter());
+    // Подпишемся на событие открытия плеера панорам.
+    manager.events.add("openplayer", function () {
+      // Получим текущий плеер панорам.
+      let player = manager.getPlayer();
+      player.events.add(["panoramachange", "destroy"], function () {});
+    });
+  })
+}
+  const getRegions = (ymaps, countryCode, coordinates) => {
     if (mapRef && mapRef.current) {
-      let objectManager = new ymaps.ObjectManager();
+     
+      yamaps=ymaps;
+      console.log(yamaps)
+      const objectManager = new ymaps.ObjectManager();
       ymaps.borders
-        .load("BY", {
+        .load(`001`, {
           lang: "ru",
-          quality: 2,
+          quality: 0,
         })
-        .then(function (geojson) {
-          for (let i = 0; i < geojson.features.length; i++) {
-            let geoObject = new ymaps.GeoObject(geojson.features[i]);
-
-            mapRef.current.geoObjects.add(objectManager);
-            mapRef.current.geoObjects.add(geoObject);
-          }
-        });
+        .then((result)=>{
+          mapRef.current.geoObjects.remove(layer)
+          const options = {
+              fillOpacity: 0,
+              fillColor: "#6961b0",
+              strokeColor: "#FFF",
+              strokeOpcaity: 0,
+              labelDefaults: "dark"
+              
+            }
+            const options1 = {
+              fillOpacity: 0.4,
+              fillColor: "#DC143C",
+              strokeColor: "#FFF",
+              strokeOpcaity: 0.4,
+            }
+            layer = objectManager.add(result.features.map(function(feature) {
+              
+              
+              
+              
+              //console.log(feature.properties)
+              if (feature.properties.iso3166===countryCode) {
+                feature.id = feature.properties.iso3166;
+                feature.properties.regionName=feature.properties.iso3166;
+                feature.options = options1
+                
+              } else {
+                feature.options = options
+              }
+              
+              return feature
+            }))
+            //let placemark = new ymaps.Placemark(coordinates)
+            mapRef.current.geoObjects.add(layer)
+          //mapRef.current.geoObjects.add(placemark)
+          
+          })
+          //let objectManager= new ymaps.ObjectManager()
+          
+          
+             
+             
     }
   };
+
+  useEffect(()=> {
+    getRegions(yamaps, props.countryCode, props.coordinates);
+    //setCoords(props.coordinates)
+  },[props.countryCode])
   return (
+    <div >
     <YMaps
-      enterprise
+    onApiAvaliable={ymaps => onApiAvaliable(ymaps)}
+    useRef={yMapRef}
       query={{
+        ns: "ymaps",
         apikey: "5a8e8b64-fb32-44f6-b12c-859adad5caf3",
+        load: "package.full"
       }}
     >
       <Map
-        onLoad={(ymaps) => getRegions(ymaps)}
+      className="map"
+        onLoad={(ymaps) => getRegions(ymaps, props.countryCode)}
         instanceRef={mapRef}
-        defaultState={{
-          center: [55.75, 37.57],
-          zoom: 3,
+        state={{
+          center: props.coordinates,
+          zoom: 4.5,
           controls: ["zoomControl", "fullscreenControl"],
         }}
-        modules={[
-          "control.ZoomControl",
-          "control.FullscreenControl",
-          "borders",
-          "ObjectManager",
-        ]}
+        // modules={[
+        //   "control.ZoomControl",
+        //   "control.FullscreenControl",
+        //   "borders",
+        //   "ObjectManager",
+        // ]}
       >
-        <Placemark defaultGeometry={[55.75, 37.57]} />
+        <Placemark geometry={props.coordinates} />
       </Map>
-      <Panorama defaultPoint={[55.733685, 37.588264]} />
+      {/* <Panorama defaultPoint={[55.733685, 37.588264]} /> */}
     </YMaps>
+    </div>
   );
 };

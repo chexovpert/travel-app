@@ -130,7 +130,7 @@ export default (props) => {
         <h2>Gallery</h2>
         <ImageGallery images={data.images} />
         <h2>Location</h2>
-        <Maps></Maps>
+        <Maps coordinates={data.coordinates} countryCode={data.countryCode} lang={"en"}></Maps>
         <h2>Video</h2>
         <Video url={data.video} />
       </div>
