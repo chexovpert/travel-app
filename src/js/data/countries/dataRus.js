@@ -26,8 +26,7 @@ export const dataRus = [
     currency: "EUR",
     capitalName: "Madrid",
     countryCode: "ES",
-    coordinates: [40.42, -3.70]
-    
+    coordinates: [40.42, -3.7],
   },
   {
     country: "Италия",
@@ -52,8 +51,7 @@ export const dataRus = [
     currency: "EUR",
     capitalName: "Rome",
     countryCode: "IT",
-    coordinates: [41.9, 12.49]
-    
+    coordinates: [41.9, 12.49],
   },
   {
     country: "Франция",
@@ -78,6 +76,7 @@ export const dataRus = [
     currency: "EUR",
     capitalName: "Paris",
     countryCode: "FR",
+    coordinates: [48.85, 2.34],
   },
   {
     country: "Португалия",
@@ -102,6 +101,7 @@ export const dataRus = [
     currency: "EUR",
     capitalName: "Lisbon",
     countryCode: "PT",
+    coordinates: [38.71, -9.14],
   },
   {
     country: "Турция",
@@ -126,6 +126,7 @@ export const dataRus = [
     currency: "TRY",
     capitalName: "Ankara",
     countryCode: "TR",
+    coordinates: [39.92, 32.85],
   },
   {
     country: "Индонезия",
@@ -150,6 +151,7 @@ export const dataRus = [
     currency: "IDR",
     capitalName: "Jakarta",
     countryCode: "ID",
+    coordinates: [-6.17, 106.82],
   },
   {
     country: "Тайланд",
@@ -174,6 +176,7 @@ export const dataRus = [
     currency: "THB",
     capitalName: "Bangkok",
     countryCode: "TH",
+    coordinates: [13.76, 100.62],
   },
   {
     country: "Япония",
@@ -198,6 +201,7 @@ export const dataRus = [
     currency: "JPY",
     capitalName: "Tokio",
     countryCode: "JP",
+    coordinates: [35.6817, 139.753882],
   },
 ];
 

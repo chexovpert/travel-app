@@ -113,25 +113,31 @@ export default (props) => {
   console.log(data);
 
   return (
-    <section className="countryPage">
-      <div
-        className="current-bg main-page--bg"
-        style={{ backgroundImage: `url('${data.bgImage}')` }}
-      ></div>
+    <div className="countryPage">
+      <div>
+        <div
+          className="current-bg main-page--bg"
+          style={{ backgroundImage: `url('${data.bgImage}')` }}
+        ></div>
+      </div>
       <p className="countryPage__name">
         Country Page - {props.match.params.countryName} -{" "}
         {/* {window.location.pathname} - {window.location.hashname} */}
       </p>
 
       <div class="countryPage__main">
-        <h1>{data.country}</h1>
-        <p>{data.capital}</p>
-        <h2>{data.about}</h2>
-        <h2>Gallery</h2>
+        <h1 className="countryPage__title">{data.country}</h1>
+        <h2 className="countryPage__capital">{data.capital}</h2>
+        <p className="countryPage__description">{data.about}</p>
+        <h2 className="countryPage__category">Gallery</h2>
         <ImageGallery images={data.images} />
-        <h2>Location</h2>
-        <Maps coordinates={data.coordinates} countryCode={data.countryCode} lang={"en"}></Maps>
-        <h2>Video</h2>
+        <h2 className="countryPage__category">Location</h2>
+        <Maps
+          coordinates={data.coordinates}
+          countryCode={data.countryCode}
+          lang={"en"}
+        ></Maps>
+        <h2 className="countryPage__category">Video</h2>
         <Video url={data.video} />
       </div>
 
@@ -143,7 +149,7 @@ export default (props) => {
         <h3 className="countryPage__aside-title">Exchange</h3>
         <Exchange currency={data.currency} />
       </div>
-    </section>
+    </div>
   );
 };
 {

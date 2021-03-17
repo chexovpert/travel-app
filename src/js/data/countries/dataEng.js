@@ -25,6 +25,8 @@ export const dataEng = [
     capitalName: "Madrid",
     utc: +60,
     currency: "EUR",
+    countryCode: "ES",
+    coordinates: [40.42, -3.7],
   },
   {
     country: "Italy",
@@ -48,6 +50,8 @@ export const dataEng = [
     utc: +60,
     currency: "EUR",
     capitalName: "Rome",
+    countryCode: "IT",
+    coordinates: [41.9, 12.49],
   },
   {
     country: "France",
@@ -71,6 +75,8 @@ export const dataEng = [
     utc: +60,
     currency: "EUR",
     capitalName: "Paris",
+    countryCode: "FR",
+    coordinates: [48.85, 2.34],
   },
   {
     country: "Portugal",
@@ -94,6 +100,8 @@ export const dataEng = [
     utc: -60,
     currency: "EUR",
     capitalName: "Lisbon",
+    countryCode: "PT",
+    coordinates: [38.71, -9.14],
   },
   {
     country: "Turkey",
@@ -117,6 +125,8 @@ export const dataEng = [
     utc: +180,
     currency: "TRY",
     capitalName: "Ankara",
+    countryCode: "TR",
+    coordinates: [39.92, 32.85],
   },
   {
     country: "Indonesia",
@@ -140,6 +150,8 @@ export const dataEng = [
     utc: +480,
     currency: "IDR",
     capitalName: "Jakarta",
+    countryCode: "ID",
+    coordinates: [-6.17, 106.82],
   },
   {
     country: "Thailand",
@@ -163,6 +175,8 @@ export const dataEng = [
     utc: +400,
     currency: "THB",
     capitalName: "Bangkok",
+    countryCode: "TH",
+    coordinates: [13.76, 100.62],
   },
   {
     country: "Japan",
@@ -186,6 +200,8 @@ export const dataEng = [
     utc: +540,
     currency: "JPY",
     capitalName: "Tokio",
+    countryCode: "JP",
+    coordinates: [35.6817, 139.753882],
   },
 ];
 

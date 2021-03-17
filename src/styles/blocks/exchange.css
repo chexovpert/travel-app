@@ -2,7 +2,9 @@
   width: 100%;
   max-width: 300px;
   padding: 5px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5%;
+  text-shadow: 1px 1px 2px black;
 }
 
 .exchange__table {
@@ -19,12 +21,12 @@
   width: 100%;
 }
 .exchange__current {
-  background-color: white;
-  font-size: 0.875em;
-  color: gray;
+  background-color: transparent;
+  /* font-size: 0.875em; */
+  /* color: gray; */
 }
 .exchange__date {
-  font-size: 0.875em;
-  color: blue;
+  /* font-size: 0.875em; */
+  color: gainsboro;
   text-align: right;
 }
