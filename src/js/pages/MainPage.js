@@ -185,7 +185,6 @@ export default class MainPage extends Component {
     if (updatedData[1] !== undefined) {
       currentBackground = updatedData[1].bgImage;
     }
-    console.log(currentBackground);
 
     if (prevProps.search !== this.props.search) {
       this.setState({

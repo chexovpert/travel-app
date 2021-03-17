@@ -9,16 +9,38 @@ export default class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
+    this.inputPlaceholder = '';
+    this.inputValue = '';
     this.changeLang = this.changeLang.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
   searchHandler(event) {
     this.props.searchHandler(event);
-    console.log("event");
   }
   changeLang() {
     const selectedLang = document.querySelector(".select__lang").value;
     updateLang(selectedLang, langApp);
+    let placeholderText = '';
+    const stateLang = document
+      .getElementsByTagName("html")[0]
+      .getAttribute("lang");
+    if (stateLang === 'rus') placeholderText = 'Введите страну';
+    if (stateLang === 'eng') placeholderText = 'Write country';
+    if (stateLang === 'es') placeholderText = 'Ingrese su pais';
+    this.setState({
+      inputPlaceholder: placeholderText,
+    })
+  }
+
+  clearInput() {
+    const inputValue = document.querySelector('.find__input');
+    inputValue.value = '';
+  }
+
+  componentDidMount() {
+    this.setState({
+      inputPlaceholder: 'Введите страну',
+    })
   }
 
   render() {
@@ -31,12 +53,15 @@ export default class Header extends Component {
               Трэвал апп
             </span>
           </Link>
-          <input
-            onChange={this.searchHandler.bind(this)}
-            className="find__input"
-            type="text"
-            placeholder="Write country"
-          />
+          <label className="input-label">
+            <input
+              onChange={this.searchHandler.bind(this)}
+              className="find__input"
+              type="text"
+              placeholder={`${this.state.inputPlaceholder}`}
+            />
+            <span className="clear__input" onClick={this.clearInput}>x</span>
+          </label>
           <select className="select__lang" onChange={this.changeLang}>
             <option className="lang__item" value="rus" defaultValue="selected">
               Русский
