@@ -12,7 +12,7 @@ export const langApp = {
   },
 
   'curr-lang': {
-    'rus': 'Рус',
+    'rus': 'rus',
     'eng': 'Eng',
     'es': 'Es'
   },
@@ -23,6 +23,41 @@ export const langApp = {
     'es': 'Exploreso'
   },
 
+  'gallery': {
+    'rus': 'Галерея',
+    'eng': 'Gallery',
+    'es': 'Galería'
+  },
+  
+  'location': {
+    'rus': 'Расположение',
+    'eng': 'Location',
+    'es': 'Localización'
+  },
+
+  'video': {
+    'rus': 'Видео',
+    'eng': 'Video',
+    'es': 'Video'
+  },
+  
+  'time': {
+    'rus': 'Время',
+    'eng': 'Time',
+    'es': 'Hora'
+  },
+
+  'weather': {
+    'rus': 'Погода',
+    'eng': 'Weather',
+    'es': 'Tiempo'
+  },
+  
+  'exchange': {
+    'rus': 'Курс',
+    'eng': 'Exchange',
+    'es': 'Intercambio'
+  }
 }
 
 

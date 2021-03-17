@@ -84,6 +84,9 @@ import Exchange from "../blocks/exchange";
 import Video from "../blocks/video";
 import ImageGallery from "../blocks/image-galery";
 import appData from "../data/appData";
+import updateLang from '../logic/updateLang';
+import langApp from '../data/langApp';
+
 export default (props) => {
   const [countryData, setCountryData] = useState(appData[1][0]);
   const [lang, setLang] = useState("rus");
@@ -104,6 +107,7 @@ export default (props) => {
     const langIndex = appData[0].indexOf(lang);
     setLang(stateLang);
     setCountryData(appData[countryArr][langIndex]);
+    updateLang(stateLang, langApp);
   }, []);
 
   //console.log(this.props.match.params.countryName);
@@ -120,33 +124,34 @@ export default (props) => {
           style={{ backgroundImage: `url('${data.bgImage}')` }}
         ></div>
       </div>
-      <p className="countryPage__name">
-        Country Page - {props.match.params.countryName} -{" "}
-        {/* {window.location.pathname} - {window.location.hashname} */}
-      </p>
+      <div className="main-page--bg-linear"></div>
+      {/* <p className="countryPage__name">
+        { Country Page - {props.match.params.countryName} -{" "} }
+        { {window.location.pathname} - {window.location.hashname} }
+      </p> */}
 
       <div class="countryPage__main">
         <h1 className="countryPage__title">{data.country}</h1>
         <h2 className="countryPage__capital">{data.capital}</h2>
         <p className="countryPage__description">{data.about}</p>
-        <h2 className="countryPage__category">Gallery</h2>
+        <h2 className="countryPage__category gallery--lang">Gallery</h2>
         <ImageGallery images={data.images} />
-        <h2 className="countryPage__category">Location</h2>
+        <h2 className="countryPage__category location--lang">Location</h2>
         <Maps
           coordinates={data.coordinates}
           countryCode={data.countryCode}
-          lang={"en"}
+          //lang={"en"}
         ></Maps>
-        <h2 className="countryPage__category">Video</h2>
+        <h2 className="countryPage__category video--lang">Video</h2>
         <Video url={data.video} />
       </div>
 
       <div class="countryPage__aside">
-        <h3 className="countryPage__aside-title">Time</h3>
+        <h3 className="countryPage__aside-title time--lang">Time</h3>
         <Time utc={data.utc} />
-        <h3 className="countryPage__aside-title">Weather</h3>
+        <h3 className="countryPage__aside-title weather--lang">Weather</h3>
         <Weather lang={lang} capital={data.capitalName} />
-        <h3 className="countryPage__aside-title">Exchange</h3>
+        <h3 className="countryPage__aside-title exchange--lang">Exchange</h3>
         <Exchange currency={data.currency} />
       </div>
     </div>
