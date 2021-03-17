@@ -24,7 +24,6 @@ export default class PageComponents extends Component {
   }
   searchHandler(event) {
     this.setState({ search: event.target.value });
-    console.log(this.state.search);
   }
   updateCountry(event) {
     const linkItem = event.target.closest(".country__link");
@@ -42,9 +41,6 @@ export default class PageComponents extends Component {
             countryName: item.pathName,
             countryData: { ...item },
           });
-          console.log(item);
-          //console.log(countryData);
-          console.log(this.state.countryData);
         }
       });
     }

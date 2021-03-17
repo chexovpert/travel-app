@@ -53,11 +53,48 @@
   background-color: transparent;
 }
 
-.find__input {
+
+.input-label {
   margin-left: auto;
+  position: relative;
+}
+
+.clear__input {
+  position: absolute;
+  top: 2px;
+  right: 12px;
+  width: 21px;
+  height: 21px;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: border-color 0.3s linear;
+}
+
+.clear__input:hover {
+  cursor: pointer;
+  border-color: var(--white);
+  transition: border-color 0.3s linear;
+}
+
+.clear__input:active {
+  background-color: var(--white);
+  color: var(--black);
+  transition: background-color 0.1s linear, color 0.1s linear;
+}
+
+.find__input {
   margin-right: 10px;
   padding-left: 5px;
   width: 150px;
+}
+
+.find__input:hover + .clear__input {
+  color: var(--black);
 }
 
 .find__input::placeholder {
@@ -66,6 +103,7 @@
 }
 
 .find__input:hover {
+  color: var(--black);
   background-color: var(--white);
   transition: background-color 0.5s ease-in-out;
 }

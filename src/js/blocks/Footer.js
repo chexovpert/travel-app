@@ -26,10 +26,10 @@ export default class Footer extends Component {
                 <a href="https://github.com/Arseni-p" className="authors__link" target="_blank">Arseni-p</a>
               </li>
               <li className="authors__item">
-                <a href="https://github.com/" className="authors__link" target="_blank">Macros</a>
+                <a href="https://github.com/chexovpert" className="authors__link" target="_blank">Macros</a>
               </li>
               <li className="authors__item">
-                <a href="https://github.com/" className="authors__link" target="_blank">Dispet</a>
+                <a href="https://github.com/dispet" className="authors__link" target="_blank">Dispet</a>
               </li>
             </ul>
           </div>
