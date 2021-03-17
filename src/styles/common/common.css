@@ -1,4 +1,4 @@
-/*@import './fonts.css';*/
+@import './fonts.css';
 @import './colors.css';
 
 body * {
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto', 'Oxygen', 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   min-width: 320px;
   /*border: 1px dashed white;*/
   min-height: 100vh;
