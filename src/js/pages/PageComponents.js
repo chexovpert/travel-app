@@ -16,12 +16,16 @@ export default class PageComponents extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      search: "",
       countryArr: appData[1][0],
       countryName: "",
     };
     this.updateCountry = this.updateCountry.bind(this);
   }
-
+  searchHandler(event) {
+    this.setState({ search: event.target.value });
+    console.log(this.state.search);
+  }
   updateCountry(event) {
     const linkItem = event.target.closest(".country__link");
     const linkItemPreview = event.target.closest(".precountry__link");
@@ -51,7 +55,7 @@ export default class PageComponents extends Component {
       <HashRouter basename="/">
         <div className="app-wrapper">
           <div className="content-wrapper">
-            <Header />
+            <Header searchHandler={this.searchHandler.bind(this)} />
             <main className="main__wrapper" onClick={this.updateCountry}>
               <Switch>
                 <Route
@@ -69,7 +73,7 @@ export default class PageComponents extends Component {
                 />
               </Route> */}
                 <Route path="/" exact>
-                  <MainPage />
+                  <MainPage search={this.state.search} />
                 </Route>
               </Switch>
             </main>
