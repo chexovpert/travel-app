@@ -1,0 +1,11 @@
+@import "./common/common.css";
+@import "./blocks/header.css";
+@import "./blocks/main-page.css";
+@import "./blocks/country-page.css";
+@import "./blocks/footer.css";
+@import "./blocks/exchange.css";
+@import "./blocks/time-widget.css";
+@import "./blocks/weather.css";
+@import "../assets/fonts/owfont-master/css/owfont-regular.css";
+
+@import "../../node_modules/react-image-gallery/styles/css/image-gallery.css";

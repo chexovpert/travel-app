@@ -1,0 +1,32 @@
+.exchange {
+  width: 100%;
+  max-width: 300px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5%;
+  text-shadow: 1px 1px 2px black;
+}
+
+.exchange__table {
+  width: 100%;
+}
+
+.exchange__base {
+  background-color: #2d6ab4;
+  height: 24px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 3px;
+  width: 100%;
+}
+.exchange__current {
+  background-color: transparent;
+  /* font-size: 0.875em; */
+  /* color: gray; */
+}
+.exchange__date {
+  /* font-size: 0.875em; */
+  color: gainsboro;
+  text-align: right;
+}
