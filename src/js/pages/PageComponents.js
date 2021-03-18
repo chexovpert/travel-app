@@ -11,13 +11,22 @@ import Footer from "../blocks/Footer";
 import CountryPage from "./CountryPage";
 import MainPage from "./MainPage";
 import appData from "../data/appData";
+import {getData} from "./service";
 
 export default class PageComponents extends Component {
+  async componentWillMount() {
+    let data = await getData('rus').then((json) => {return json});
+    this.setState({
+      search: "",
+      countryName: '',
+      countryArr: data,
+    });
+  };
   constructor(props) {
     super(props);
     this.state = {
       search: "",
-      countryArr: appData[1][0],
+      countryArr: [],//appData[1][0]
       countryName: "",
     };
     this.updateCountry = this.updateCountry.bind(this);
@@ -48,35 +57,35 @@ export default class PageComponents extends Component {
 
   render() {
     return (
-      <HashRouter basename="/">
-        <div className="app-wrapper">
-          <div className="content-wrapper">
-            <Header searchHandler={this.searchHandler.bind(this)} />
-            <main className="main__wrapper" onClick={this.updateCountry}>
-              <Switch>
-                <Route
-                  path={"/Country-:countryName"}
-                  exact
-                  render={(props) => (
-                    <CountryPage
-                      // countryData={this.state.countryData}
-                      {...props}
-                    ></CountryPage>
-                  )}
-                />
-                {/* <Route path={`/Country-${this.state.countryName}`} exact >
+        <HashRouter basename="/">
+          <div className="app-wrapper">
+            <div className="content-wrapper">
+              <Header searchHandler={this.searchHandler.bind(this)} />
+              <main className="main__wrapper" onClick={this.updateCountry}>
+                <Switch>
+                  <Route
+                      path={"/Country-:countryName"}
+                      exact
+                      render={(props) => (
+                          <CountryPage
+                              // countryData={this.state.countryData}
+                              {...props}
+                          ></CountryPage>
+                      )}
+                  />
+                  {/* <Route path={`/Country-${this.state.countryName}`} exact >
                 <CountryPage countryName={this.state.countryName} 
                 />
               </Route> */}
-                <Route path="/" exact>
-                  <MainPage search={this.state.search} />
-                </Route>
-              </Switch>
-            </main>
+                  <Route path="/" exact>
+                    <MainPage search={this.state.search} />
+                  </Route>
+                </Switch>
+              </main>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </HashRouter>
+        </HashRouter>
     );
   }
 }

@@ -1,6 +1,7 @@
 import appData from '../data/appData';
+import {getData} from "../pages/service";
 
-export const updateLang = (selectedLang, langApp) => {
+export const updateLang = async (selectedLang, langApp) => {
   const wrapper = document.querySelector('.app-wrapper');
   const currFlag = document.querySelector('.curr-lang__flag');
   const lang = selectedLang;
@@ -13,6 +14,7 @@ export const updateLang = (selectedLang, langApp) => {
       elem.textContent = langApp[key][lang]
     }
   }
+  let data = await getData(lang).then((json) => {return json});
 
   const previewWrapper = document.querySelector('.precountry__link');
   if (previewWrapper) {
@@ -23,8 +25,7 @@ export const updateLang = (selectedLang, langApp) => {
     const countryAboutArr = document.querySelectorAll('.country-about__text');
 
     let i = 0;
-
-    appData[1][dataLangIndex].forEach(item => {
+    data.forEach(item => {
       countryNameArr[i].textContent = item.country;
       countryTitleArr[i].textContent = item.country;
       countryCapitalArr[i].textContent = item.capital;

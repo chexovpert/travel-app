@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import updateMainBgn from "../logic/updateMainBg";
 import PreviewText from "../blocks/PreviewText";
 import PreviewLine from "../blocks/PreviewLine";
+import {getData} from "./service";
 
 export default class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countryData: appData[1][0],
+      countryData: [],//appData[1][0],
       lang: "rus",
       curLang: "рус",
       countryList: [],
@@ -21,8 +22,9 @@ export default class MainPage extends Component {
       countPosY: 0,
       disabled: true,
       currPreCountry: "spain",
-      nextBackground: appData[1][0][1].bgImage,
-      currentBackground: appData[1][0][0].bgImage,
+      // nextBackground: appData[1][0][1].bgImage,
+      // currentBackground: appData[1][0][0].bgImage,
+      loading: true,
     };
 
     this.countryItemChange = this.countryItemChange.bind(this);
@@ -37,9 +39,9 @@ export default class MainPage extends Component {
     const currCount = document.querySelector(".curr-count");
     const countArray = document.querySelectorAll(".preview-count__item");
     const countryNameHeight = document.querySelector(".country-name__item")
-      .offsetHeight;
+        .offsetHeight;
     const countryAboutHeight = document.querySelector(".country-about__item")
-      .offsetHeight;
+        .offsetHeight;
     const countHeight = document.querySelector(".count__item").offsetHeight;
     const currItem = document.querySelector(".country__item--current");
     const btnLeft = document.querySelector(".btn__left");
@@ -47,8 +49,8 @@ export default class MainPage extends Component {
     currCount.classList.remove("curr-count");
     this.state.itemSize = currItem.offsetWidth + marginRight;
     if (
-      event.target.closest(".btn__left") &&
-      this.state.posX < this.state.countryList.length - 1
+        event.target.closest(".btn__left") &&
+        this.state.posX < this.state.countryList.length - 1
     ) {
       if (btnRight.disabled) {
         this.setState({
@@ -57,16 +59,16 @@ export default class MainPage extends Component {
         btnRight.removeAttribute("disabled");
       }
       this.state.countryList[this.state.posX].classList.remove(
-        "country__item--opacity-off"
+          "country__item--opacity-off"
       );
       this.state.countryList[this.state.posX].classList.remove(
-        "country__item--current-on"
+          "country__item--current-on"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--current-off"
+          "country__item--current-off"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--opacity"
+          "country__item--opacity"
       );
       this.state.posX++;
       this.state.moveCount -= this.state.itemSize;
@@ -74,10 +76,10 @@ export default class MainPage extends Component {
       this.state.aboutPosY -= countryAboutHeight;
       this.state.countPosY -= countHeight;
       this.state.countryList[this.state.posX].classList.remove(
-        "country__item--current-off"
+          "country__item--current-off"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--current-on"
+          "country__item--current-on"
       );
     }
 
@@ -89,20 +91,20 @@ export default class MainPage extends Component {
         btnLeft.removeAttribute("disabled");
       }
       this.state.countryList[this.state.posX].classList.remove(
-        "country__item--current-on"
+          "country__item--current-on"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--current-off"
+          "country__item--current-off"
       );
       this.state.posX--;
       this.state.countryList[this.state.posX].classList.remove(
-        "country__item--current-off"
+          "country__item--current-off"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--opacity-off"
+          "country__item--opacity-off"
       );
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--current-on"
+          "country__item--current-on"
       );
       this.state.moveCount += this.state.itemSize;
       this.state.namePosY += countryNameHeight;
@@ -121,10 +123,10 @@ export default class MainPage extends Component {
     setTimeout(() => {
       currItem.classList.remove("country__item--current");
       this.state.countryList[this.state.posX].classList.add(
-        "country__item--current"
+          "country__item--current"
       );
       const newCurrCountryItem = document.querySelector(
-        ".country__item--current"
+          ".country__item--current"
       );
       const newCurrCountry = newCurrCountryItem.querySelector(".country__name");
       this.state.countryData.forEach((item) => {
@@ -141,13 +143,26 @@ export default class MainPage extends Component {
     countList.style.transform = `translateY(${this.state.countPosY}px)`;
   }
 
-  componentDidMount() {
+  // async componentWillMount() {console.log('componentWillMount')
+  //   await getData(this.state.lang)
+  //       .then(response => response)
+  //       .then(data => {
+  //         this.setState({
+  //           loading: false,
+  //           nextBackground: data[1].bgImage,
+  //           currentBackground: data[0].bgImage,
+  //           countryData: data,
+  //         })
+  //       })
+  // }
+
+  async componentDidMount() {
     const countryArr = 1;
     const stateCountryList = document.querySelectorAll(".country__item");
-    stateCountryList[0].classList.add("country__item--current");
+    stateCountryList[0]?.classList.add("country__item--current");
     const stateLang = document
-      .getElementsByTagName("html")[0]
-      .getAttribute("lang");
+        .getElementsByTagName("html")[0]
+        .getAttribute("lang");
     // this.setState({
     //   countryList: stateCountryList,
     //   lang: stateLang,
@@ -158,24 +173,43 @@ export default class MainPage extends Component {
     // this.setState({
     //   countryData: appData[countryArr][langIndex],
     // })
-    this.state.countryData = appData[countryArr][langIndex];
-    // const currentBackground = appData[0].bgImage;
-    // const nextBackground = appData[1].bgImage;
-    this.setState({
-      countryList: stateCountryList,
-      lang: stateLang,
-      countryData: appData[countryArr][langIndex],
-      // currentBackground: currentBackground,
-      // nextBackground: nextBackground,
-    });
+    // this.state.countryData = appData[countryArr][langIndex];
+    // // const currentBackground = appData[0].bgImage;
+    // // const nextBackground = appData[1].bgImage;
+    //
+    // this.setState({
+    //   countryList: stateCountryList,
+    //   lang: stateLang,
+    //   countryData: appData[countryArr][langIndex],
+    //   // currentBackground: currentBackground,
+    //   // nextBackground: nextBackground,
+    // });
+    await getData(this.state.lang)
+        .then(response => response)
+        .then(data => {
+          this.setState({
+            loading: false,
+            countryList: stateCountryList,
+            lang: stateLang,
+            nextBackground: data[1].bgImage,
+            currentBackground: data[0].bgImage,
+            countryData: data,
+          })
+        })
   }
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.search);
+  async componentDidUpdate(prevProps, prevState) {
+    const stateCountryList = document.querySelectorAll(".country__item");
+    stateCountryList[0]?.classList.add("country__item--current");
+    this.state.countryList = stateCountryList;
+    // this.state.lang = stateLang;
     const countryArr = 1;
     const langIndex = appData[0].indexOf(this.state.lang);
-    const data = appData[countryArr][langIndex];
+    // const data = appData[countryArr][langIndex];
+    let data = await getData(this.state.lang)
+        .then(response => response)
+        .then(data => data)
     const updatedData = data.filter((country) =>
-      country.country.toLowerCase().includes(this.props.search.toLowerCase())
+        country.country.toLowerCase().includes(this.props.search.toLowerCase())
     );
     let currentBackground = this.state.currentBackground;
     if (updatedData[0] !== undefined) {
@@ -196,79 +230,80 @@ export default class MainPage extends Component {
   }
 
   render() {
-    return (
-      <div className="main-page__content">
-        <div
-          className="next-bg main-page--bg"
-          style={{
-            backgroundImage: `url('${this.state.nextBackground}')`,
-          }}
-        ></div>
-        <div
-          className="current-bg main-page--bg"
-          style={{
-            backgroundImage: `url('${this.state.currentBackground}')`,
-          }}
-        ></div>
-        <div className="main-page--bg-linear"></div>
-        <div className="main-page__preview">
-          <PreviewLine countryData={this.state.countryData} />
-          <div className="preview__wrapper">
-            <PreviewText
-              countryData={this.state.countryData}
-              currPreCountry={this.state.currPreCountry}
-            />
-            <div className="country__list--wrapper">
-              <div className="country__list--content">
-                <ul className="country__list">
-                  {this.state.countryData.map((item, index) => (
-                    <li className="country__item" key={index}>
-                      <Link
-                        className="country__link"
-                        to={`/country-${item.pathName}`}
-                      >
-                        <p className="country__info">
-                          <span className="country__name">{item.country}</span>
-                          <span className="country__capital">
+    return this.state.loading ? <div>Загрузка</div> :
+        (
+            <div className="main-page__content">
+              <div
+                  className="next-bg main-page--bg"
+                  style={{
+                    backgroundImage: `url('${this.state.nextBackground}')`,
+                  }}
+              ></div>
+              <div
+                  className="current-bg main-page--bg"
+                  style={{
+                    backgroundImage: `url('${this.state.currentBackground}')`,
+                  }}
+              ></div>
+              <div className="main-page--bg-linear"></div>
+              <div className="main-page__preview">
+                <PreviewLine countryData={this.state.countryData} />
+                <div className="preview__wrapper">
+                  <PreviewText
+                      countryData={this.state.countryData}
+                      currPreCountry={this.state.currPreCountry}
+                  />
+                  <div className="country__list--wrapper">
+                    <div className="country__list--content">
+                      <ul className="country__list">
+                        {this.state.countryData.map((item, index) => (
+                            <li className="country__item" key={index}>
+                              <Link
+                                  className="country__link"
+                                  to={`/country-${item.pathName}`}
+                              >
+                                <p className="country__info">
+                                  <span className="country__name">{item.country}</span>
+                                  <span className="country__capital">
                             {item.capital}
                           </span>
-                        </p>
-                        <div
-                          className="country__image"
-                          style={{
-                            backgroundImage: `url('${item.previewImage}')`,
-                          }}
-                        ></div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="preview-list__btn--wrapper">
-                <button
-                  type="button"
-                  className="preview-list__btn preview-list__btn--left btn__left"
-                  onClick={this.countryItemChange}
-                >
-                  Left
-                </button>
-                <button
-                  type="button"
-                  className="preview-list__btn preview-list__btn--right btn__right"
-                  onClick={this.countryItemChange}
-                  disabled={this.state.disabled}
-                >
-                  Right
-                </button>
-                <p className="curr-lang curr-lang--lang">
-                  {this.state.curLang}
-                </p>
-                <p className={`curr-lang__flag flag__${this.state.lang}`}></p>
+                                </p>
+                                <div
+                                    className="country__image"
+                                    style={{
+                                      backgroundImage: `url('${item.previewImage}')`,
+                                    }}
+                                ></div>
+                              </Link>
+                            </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="preview-list__btn--wrapper">
+                      <button
+                          type="button"
+                          className="preview-list__btn preview-list__btn--left btn__left"
+                          onClick={this.countryItemChange}
+                      >
+                        Left
+                      </button>
+                      <button
+                          type="button"
+                          className="preview-list__btn preview-list__btn--right btn__right"
+                          onClick={this.countryItemChange}
+                          disabled={this.state.disabled}
+                      >
+                        Right
+                      </button>
+                      <p className="curr-lang curr-lang--lang">
+                        {this.state.curLang}
+                      </p>
+                      <p className={`curr-lang__flag flag__${this.state.lang}`}></p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
+        );
   }
 }

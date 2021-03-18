@@ -86,76 +86,87 @@ import ImageGallery from "../blocks/image-galery";
 import appData from "../data/appData";
 import updateLang from '../logic/updateLang';
 import langApp from '../data/langApp';
-
+import {getData, getDataCountry} from "./service";
+let arr;
 export default (props) => {
-  const [countryData, setCountryData] = useState(appData[1][0]);
+  const [countryData, setCountryData] = useState([]);//appData[1][0]props.countryData
+  const [loading, setLoading] = useState(true);
   const [lang, setLang] = useState("rus");
   const [curLang, setCurLang] = useState("рус");
   const [currentData, setCurrentData] = useState(null);
 
   const copySorted = (arr) => {
     let data = arr
-      .concat()
-      .filter((country) => country.pathName === props.match.params.countryName);
+        .concat()
+        .filter((country) => country.pathName === props.countryName);
     return data;
   };
   useEffect(() => {
-    const countryArr = 1;
-    const stateLang = document
-      .getElementsByTagName("html")[0]
-      .getAttribute("lang");
-    const langIndex = appData[0].indexOf(lang);
-    setLang(stateLang);
-    setCountryData(appData[countryArr][langIndex]);
-    updateLang(stateLang, langApp);
+    (async function() {
+      const countryArr = 1;
+      const stateLang = document
+          .getElementsByTagName("html")[0]
+          .getAttribute("lang");
+      const langIndex = appData[0].indexOf(lang);
+      let data = await getData(lang).then((json) => {return json});
+      data = data.filter((country) => country.pathName === props.match.params.countryName);
+      let dataC = await getDataCountry(data[0].id,lang).then((json) => {return json});
+      arr = [];
+      const arrC = dataC.images.map((image)=> image.photoUrl);
+      dataC.images = arrC;
+      arr = dataC;
+      setLoading(false);
+      setLang(stateLang);
+      setCountryData(arr);//appData[countryArr][langIndex]
+      await updateLang(stateLang, langApp);
+    })();
   }, []);
 
   //console.log(this.props.match.params.countryName);
   //console.log(this.state.countryData);
+  let data = arr;//copySorted(countryData)[0]
 
-  let data = copySorted(countryData)[0];
-  console.log(data);
-
-  return (
-    <div className="countryPage">
-      <div>
-        <div
-          className="current-bg main-page--bg"
-          style={{ backgroundImage: `url('${data.bgImage}')` }}
-        ></div>
-      </div>
-      <div className="main-page--bg-linear"></div>
-      {/* <p className="countryPage__name">
+  return loading ? <div>Загрузка</div> :
+      (
+          <div className="countryPage">
+            <div>
+              <div
+                  className="current-bg main-page--bg"
+                  style={{ backgroundImage: `url('${data.bgImage}')` }}
+              ></div>
+            </div>
+            <div className="main-page--bg-linear"></div>
+            {/* <p className="countryPage__name">
         { Country Page - {props.match.params.countryName} -{" "} }
         { {window.location.pathname} - {window.location.hashname} }
       </p> */}
 
-      <div class="countryPage__main">
-        <h1 className="countryPage__title">{data.country}</h1>
-        <h2 className="countryPage__capital">{data.capital}</h2>
-        <p className="countryPage__description">{data.about}</p>
-        <h2 className="countryPage__category gallery--lang">Gallery</h2>
-        <ImageGallery images={data.images} />
-        <h2 className="countryPage__category location--lang">Location</h2>
-        <Maps
-          coordinates={data.coordinates}
-          countryCode={data.countryCode}
-          //lang={"en"}
-        ></Maps>
-        <h2 className="countryPage__category video--lang">Video</h2>
-        <Video url={data.video} />
-      </div>
+            <div class="countryPage__main">
+              <h1 className="countryPage__title">{data.country}</h1>
+              <h2 className="countryPage__capital">{data.capital}</h2>
+              <p className="countryPage__description">{data.about}</p>
+              <h2 className="countryPage__category gallery--lang">Gallery</h2>
+              <ImageGallery images={data.images} />
+              <h2 className="countryPage__category location--lang">Location</h2>
+              <Maps
+                  coordinates={data.coordinates}
+                  countryCode={data.countryCode}
+                  //lang={"en"}
+              ></Maps>
+              <h2 className="countryPage__category video--lang">Video</h2>
+              <Video url={data.video} />
+            </div>
 
-      <div class="countryPage__aside">
-        <h3 className="countryPage__aside-title time--lang">Time</h3>
-        <Time utc={data.utc} />
-        <h3 className="countryPage__aside-title weather--lang">Weather</h3>
-        <Weather lang={lang} capital={data.capitalName} />
-        <h3 className="countryPage__aside-title exchange--lang">Exchange</h3>
-        <Exchange currency={data.currency} />
-      </div>
-    </div>
-  );
+            <div class="countryPage__aside">
+              <h3 className="countryPage__aside-title time--lang">Time</h3>
+              <Time utc={data.utc} />
+              <h3 className="countryPage__aside-title weather--lang">Weather</h3>
+              <Weather lang={lang} capital={data.capitalName} />
+              <h3 className="countryPage__aside-title exchange--lang">Exchange</h3>
+              <Exchange currency={data.currency} />
+            </div>
+          </div>
+      );
 };
 {
   /* import React, { Component } from 'react';
